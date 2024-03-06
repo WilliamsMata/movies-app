@@ -3,15 +3,15 @@ import {TMDBResponse} from '../../../infrastructure/interfaces/movie-db.response
 import {MovieMapper} from '../../../infrastructure/mappers/movie.mapper';
 import type {Movie} from '../../entities/movie.entity';
 
-export const moviesNowPlayingUseCase = async (
+export const moviesUpcomingUseCase = async (
   fetcher: HttpAdapter,
 ): Promise<Movie[]> => {
   try {
-    const nowPlaying = await fetcher.get<TMDBResponse>('/now_playing');
+    const upcoming = await fetcher.get<TMDBResponse>('/upcoming');
 
-    return nowPlaying.results.map(MovieMapper.fromMovieDBResultToEntity);
+    return upcoming.results.map(MovieMapper.fromMovieDBResultToEntity);
   } catch (error: any) {
     console.log(error);
-    throw new Error(`Error fetching now playing movies: ${error.message}`);
+    throw new Error(`Error fetching upcoming movies: ${error.message}`);
   }
 };
