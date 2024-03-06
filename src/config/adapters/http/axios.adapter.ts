@@ -25,23 +25,40 @@ export class AxiosAdapter implements HttpAdapter {
     }
   }
 
-  // async post<T>(
-  //   url: string,
-  //   data: any,
-  //   options?: Record<string, unknown>,
-  // ): Promise<T> {
-  //   // Implementation here
-  // }
+  async post<T>(
+    url: string,
+    data: any,
+    options?: AxiosRequestConfig<any>,
+  ): Promise<T> {
+    try {
+      const response = await this.axiosInstance.post<T>(url, data, options);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(`Error fetching post: ${url}. Message: ${error.message}`);
+    }
+  }
 
-  // async put<T>(
-  //   url: string,
-  //   data: any,
-  //   options?: Record<string, unknown>,
-  // ): Promise<T> {
-  //   // Implementation here
-  // }
+  async put<T>(
+    url: string,
+    data: any,
+    options?: AxiosRequestConfig<any>,
+  ): Promise<T> {
+    try {
+      const response = await this.axiosInstance.put<T>(url, data, options);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(`Error fetching put: ${url}. Message: ${error.message}`);
+    }
+  }
 
-  // async delete<T>(url: string, options?: Record<string, unknown>): Promise<T> {
-  //   // Implementation here
-  // }
+  async delete<T>(url: string, options?: AxiosRequestConfig<any>): Promise<T> {
+    try {
+      const response = await this.axiosInstance.delete<T>(url, options);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(
+        `Error fetching delete: ${url}. Message: ${error.message}`,
+      );
+    }
+  }
 }
