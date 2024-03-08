@@ -59,7 +59,7 @@ export default function HorizontalCarousel({
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item, index) => `${item.id.toString()} - ${index}`}
         data={movies}
         renderItem={({item}) => (
           <MoviePoster movie={item} width={140} height={200} />
