@@ -9,7 +9,7 @@ export const getMovieCastUseCase = async (
 ): Promise<Cast[]> => {
   try {
     const {cast} = await fetcher.get<MovieDBCastResponse>(
-      `/movie/${movieId}/credits`,
+      `/${movieId}/credits`,
     );
 
     const actors = cast.map(CastMapper.fromMovieDbCastToEntity);

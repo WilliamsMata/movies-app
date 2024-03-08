@@ -1,15 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import React from 'react';
-import {Text, View} from 'react-native';
-import type {FullMovie} from '../../../core/entities/movie.entity';
+import {FlatList, Text, View} from 'react-native';
 import {Formatter} from '../../../config/helpers/formatter';
+import type {FullMovie} from '../../../core/entities/movie.entity';
+import type {Cast} from '../../../core/entities/cast.entity';
+import CastActor from '../cast/CastActor';
 
 interface MovieDetailsProps {
   movie: FullMovie;
+  cast: Cast[];
 }
 
-export default function MovieDetails({movie}: MovieDetailsProps) {
+export default function MovieDetails({movie, cast}: MovieDetailsProps) {
   return (
     <>
       <View style={{marginHorizontal: 20}}>
@@ -33,7 +36,7 @@ export default function MovieDetails({movie}: MovieDetailsProps) {
       </View>
 
       {/* Casting */}
-      <View style={{marginBottom: 100, marginTop: 10}}>
+      <View style={{marginBottom: 50, marginTop: 10}}>
         <Text
           style={{
             fontSize: 23,
@@ -43,6 +46,14 @@ export default function MovieDetails({movie}: MovieDetailsProps) {
           }}>
           Casting
         </Text>
+
+        <FlatList
+          data={cast}
+          keyExtractor={item => item.id.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => <CastActor actor={item} />}
+        />
       </View>
     </>
   );

@@ -12,7 +12,7 @@ interface DetailsScreenProps
 export default function DetailsScreen({route}: DetailsScreenProps) {
   const {movieId} = route.params;
 
-  const {isLoading, movie} = useMovie(movieId);
+  const {isLoading, movie, cast} = useMovie(movieId);
 
   if (isLoading || !movie) {
     return <Text>Loading...</Text>;
@@ -28,7 +28,7 @@ export default function DetailsScreen({route}: DetailsScreenProps) {
       />
 
       {/* Details */}
-      <MovieDetails movie={movie} />
+      <MovieDetails movie={movie} cast={cast} />
     </ScrollView>
   );
 }
