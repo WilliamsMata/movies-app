@@ -35,7 +35,11 @@ export default function HomeScreen() {
         <PosterCarousel movies={nowPlaying} />
 
         {/* Popular */}
-        <HorizontalCarousel movies={popular} title="Popular" />
+        <HorizontalCarousel
+          movies={popular}
+          title="Popular"
+          loadNextPage={() => console.log('reach end')}
+        />
 
         {/* Top Rated */}
         <HorizontalCarousel movies={topRated} title="Top Rated" />

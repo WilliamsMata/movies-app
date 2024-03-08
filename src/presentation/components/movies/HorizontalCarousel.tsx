@@ -1,17 +1,53 @@
-import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+} from 'react-native';
 import MoviePoster from './MoviePoster';
 import type {Movie} from '../../../core/entities/movie.entity';
 
 interface HorizontalCarouselProps {
   movies: Movie[];
   title?: string;
+  loadNextPage?: () => void;
 }
 
 export default function HorizontalCarousel({
   movies,
   title,
+  loadNextPage,
 }: HorizontalCarouselProps) {
+  const isLoading = useRef(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      isLoading.current = false;
+    }, 200);
+  }, [movies]);
+
+  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (isLoading.current) {
+      return;
+    }
+
+    const {contentOffset, layoutMeasurement, contentSize} = event.nativeEvent;
+
+    const isEnd =
+      contentOffset.x + 600 >= contentSize.width - layoutMeasurement.width;
+
+    if (!isEnd) {
+      return;
+    }
+
+    isLoading.current = true;
+
+    loadNextPage?.();
+  };
+
   return (
     <View
       // eslint-disable-next-line react-native/no-inline-styles
@@ -28,6 +64,7 @@ export default function HorizontalCarousel({
         renderItem={({item}) => (
           <MoviePoster movie={item} width={140} height={200} />
         )}
+        onScroll={onScroll}
       />
     </View>
   );
