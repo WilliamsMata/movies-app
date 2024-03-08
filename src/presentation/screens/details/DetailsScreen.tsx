@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import type {RootStackParamList} from '../../navigation/Navigation';
 import {useMovie} from '../../hooks/useMovie';
 import MovieHeader from '../../components/movie/MovieHeader';
+import MovieDetails from '../../components/movie/MovieDetails';
 
 interface DetailsScreenProps
   extends StackScreenProps<RootStackParamList, 'Details'> {}
@@ -18,7 +19,7 @@ export default function DetailsScreen({route}: DetailsScreenProps) {
   }
 
   return (
-    <View>
+    <ScrollView>
       {/* Headers */}
       <MovieHeader
         poster={movie.poster}
@@ -27,6 +28,7 @@ export default function DetailsScreen({route}: DetailsScreenProps) {
       />
 
       {/* Details */}
-    </View>
+      <MovieDetails movie={movie} />
+    </ScrollView>
   );
 }
