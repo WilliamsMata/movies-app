@@ -18,6 +18,8 @@ export default function HomeScreen() {
     topRated,
     upcoming,
     loadPopularNextPage,
+    loadTopRatedNextPage,
+    loadUpcomingNextPage,
   } = useMovies();
 
   if (isLoading) {
@@ -42,10 +44,18 @@ export default function HomeScreen() {
         />
 
         {/* Top Rated */}
-        <HorizontalCarousel movies={topRated} title="Top Rated" />
+        <HorizontalCarousel
+          movies={topRated}
+          title="Top Rated"
+          loadNextPage={loadTopRatedNextPage}
+        />
 
         {/* Upcoming */}
-        <HorizontalCarousel movies={upcoming} title="Upcoming" />
+        <HorizontalCarousel
+          movies={upcoming}
+          title="Upcoming"
+          loadNextPage={loadUpcomingNextPage}
+        />
       </View>
     </ScrollView>
   );

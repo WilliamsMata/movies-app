@@ -69,6 +69,42 @@ export const useMovies = () => {
     }
   };
 
+  const loadTopRatedNextPage = async () => {
+    try {
+      popularPage += 1;
+
+      const newTopRatedMovies = await UseCases.moviesTopRaredUseCase(
+        movieDBFetcher,
+        {page: popularPage},
+      );
+
+      setMovies(prevState => ({
+        ...prevState,
+        topRated: [...prevState.topRated, ...newTopRatedMovies],
+      }));
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+
+  const loadUpcomingNextPage = async () => {
+    try {
+      popularPage += 1;
+
+      const newUpcomingMovies = await UseCases.moviesUpcomingUseCase(
+        movieDBFetcher,
+        {page: popularPage},
+      );
+
+      setMovies(prevState => ({
+        ...prevState,
+        upcoming: [...prevState.upcoming, ...newUpcomingMovies],
+      }));
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+
   return {
     // State
     isLoading,
@@ -76,5 +112,7 @@ export const useMovies = () => {
 
     // Methods
     loadPopularNextPage,
+    loadTopRatedNextPage,
+    loadUpcomingNextPage,
   };
 };
