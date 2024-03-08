@@ -40,9 +40,9 @@ export default function MoviePoster({
 
 const styles = StyleSheet.create({
   pressable: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     paddingBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
 
   imageContainer: {

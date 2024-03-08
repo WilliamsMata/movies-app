@@ -4,15 +4,15 @@ import {ScrollView} from 'react-native-gesture-handler';
 import type {Movie} from '../../../core/entities/movie.entity';
 import MoviePoster from './MoviePoster';
 
-interface PosterCarrouselProps {
+interface PosterCarouselProps {
   movies: Movie[];
   height?: number;
 }
 
-export default function PosterCarrousel({
+export default function PosterCarousel({
   movies,
   height = 440,
-}: PosterCarrouselProps) {
+}: PosterCarouselProps) {
   return (
     <View style={{height}}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
