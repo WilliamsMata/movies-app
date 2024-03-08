@@ -51,6 +51,6 @@ export const useMovies = () => {
 
   return {
     isLoading,
-    movies,
+    ...movies,
   };
 };
